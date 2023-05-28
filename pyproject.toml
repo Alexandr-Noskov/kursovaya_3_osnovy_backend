@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "kursovaya-3-osnovy-backend"
+version = "0.1.0"
+description = ""
+authors = ["Alexandr Noskov <san9nosko8@gmail.com>"]
+readme = "README.md"
+packages = [{include = "kursovaya_3_osnovy_backend"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
