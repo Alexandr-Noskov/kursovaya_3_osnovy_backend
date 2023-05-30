@@ -1,5 +1,7 @@
-filename = 'operations.json'
 
+from utils import get_data, get_filtered_data, get_last_values, get_formatted_data
+
+filename = 'operations.json'
 
 def main():
     FILTERED_EMPTY_FROM = True
