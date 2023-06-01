@@ -9,7 +9,7 @@ def get_data(filename):
 
 
 def get_filtered_data(data, filter_empty_from=False):
-    data = (x for x in data if "state" in x and x["state"] == "EXECUTED")
+    data = [x for x in data if "state" in x and x["state"] == "EXECUTED"]
     if filter_empty_from:
         data = [x for x in data if "from" in x]
     return data
@@ -21,7 +21,7 @@ def get_last_values(data, count_last_values):
     return data
 
 
-def get_formatted_data(data, formatedd_data=None):
+def get_formatted_data(data):
     formatted_data = []
     for row in data:
         date = datetime.strptime(row["date"], "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
@@ -35,7 +35,7 @@ def get_formatted_data(data, formatedd_data=None):
             from_info = " ".join(sender)
         else:
             from_info, from_bill = "", ""
-        formatedd_data.append(f"""\
+        formatted_data.append(f"""\
 {date} {description}
 {from_info} {from_bill} -> {recipient}
 {operations_amount}""")
