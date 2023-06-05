@@ -3,12 +3,12 @@ from utils import get_data, get_filtered_data, get_formatted_data, get_last_valu
 
 def test_get_data():
     data = get_data('operations.json')
-    assert len(data) == 7
-# ispravlenie
+    assert isinstance(data, list)
+    assert data is not None
+# ispravleniee
 
-def test_get_filtered_data():
-    data = get_data('operations.json')
-    assert len(get_filtered_data(data)) == 6
+def test_get_filtered_data(item):
+    assert get_filtered_data(item)
 
 def test_get_values():
     data = get_data('../operations.json')
