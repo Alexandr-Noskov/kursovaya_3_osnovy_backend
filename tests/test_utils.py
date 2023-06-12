@@ -10,18 +10,45 @@ def test_get_data():
 # ispravleniee
 
 def test_get_filtered_data(item):
-    assert get_filtered_data(item)
+    assert get_filtered_data(item) == [{
+        "id": 441945886,
+        "state": "EXECUTED",
+        "date": "2019-08-26T10:50:58.294041",
+        "operationAmount": {
+            "amount": "31957.58",
+            "currency": {
+                "name": "руб.",
+                "code": "RUB"
+            }
+        },
+        "description": "Перевод организации",
+        "from": "Maestro 1596837868705199",
+        "to": "Счет 64686473678894779589"
+    },
+        {
+            "id": 939719570,
+            "state": "EXECUTED",
+            "date": "2018-06-30T02:08:58.425572",
+            "operationAmount": {
+                "amount": "9824.07",
+                "currency": {
+                    "name": "USD",
+                    "code": "USD"
+                }
+            },
+            "description": "Перевод организации",
+            "from": "Счет 75106830613657916952",
+            "to": "Счет 11776614605963066702"
+        }]
 
 
 def test_get_values(item):
-    data = get_data('operations.json')
-    assert get_last_values(data, 2)[0]['date'] == "2023-03-23T01:09:46.296404"
-    assert len(get_last_values(data, 5)) == 5
+    data = [elem["date"] for elem in get_last_values(item, 3)]
+    assert data == ["2019-08-26T10:50:58.294041", "2019-07-03T18:35:29.512364", "2018-06-30T02:08:58.425572"]
 
 
 def test_get_formatted_data(item):
-    data = get_data('operations.json')
-    print(get_formatted_data(data[0]))
-    assert get_formatted_data(data[0]) == """2019-08-26 10:50:58.294041 Перевод организации
-Maestro 1596 83** **** 5199 -> Счет **9589
-31957.58 руб.\n"""
+    print(get_formatted_data(item))
+    assert get_formatted_data(item) == ['26.08.2019 Перевод организации\nMaestro 1596 83** **** 5199 -> Счет **9589\n31957.58 руб.',
+                                        '03.07.2019 Перевод организации\nMasterCard 7158 30** **** 6758 -> Счет **5560\n8221.37 USD',
+                                        '30.06.2018 Перевод организации\nСчет 7510 68** **** 6952 -> Счет **6702\n9824.07 USD']
